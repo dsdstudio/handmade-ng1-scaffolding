@@ -15,7 +15,7 @@ class AboutController {
 	}
 }
 angular.module('app', [uiRouter])
-	.config(($stateProvider) => {
+	.config(($stateProvider, $urlRouterProvider) => {
 		$stateProvider.state('main', {
 			abstract:true,
 			templateUrl:layoutTpl.templateUrl,
@@ -31,7 +31,9 @@ angular.module('app', [uiRouter])
 			templateUrl:aboutTpl.templateUrl,
 			controller:AboutController,
 			controllerAs:'vm'
-		})
+		});
+
+		$urlRouterProvider.otherwise('/');
 
 	})
 	.controller('AppController', AppController);
