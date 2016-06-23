@@ -6,8 +6,10 @@
 </head>
 <body>
 	<ui-view></ui-view>
+	<!-- inject:js -->
 	<script src="jspm_packages/system.js"></script>
 	<script src="config.js"></script>
 	<script>System.import('init').catch(console.error.bind(console));</script>
+	<!-- endinject -->
 </body>
 </html>
