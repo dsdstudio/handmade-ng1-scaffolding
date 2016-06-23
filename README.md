@@ -15,3 +15,11 @@ and check your browser
 
 ## distribution building(TODO)
 
+```
+  $ gulp build
+```
+
+and check `dist` directory 
+
+```
+```
