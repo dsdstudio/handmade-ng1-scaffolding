@@ -1,6 +1,8 @@
 const inject = require('gulp-inject');
 const path = require('path');
-const gulp = require('gulp');
+const gulp = require('gulp'),
+	  gp = gulp.parallel,
+	  gs = gulp.series;
 const jspm = require('gulp-jspm');
 const clean = require('gulp-clean');
 const conf = {
@@ -12,8 +14,7 @@ gulp.task('clean', function() {
 	return gulp.src(conf.dist)
 		.pipe(clean());
 });
-gulp.task('build', ['jspm-build', 'inject:dist'], function() {});
-gulp.task('jspm-build', [], function() {
+gulp.task('jspm-build', function() {
 	const jspmOpts = {
 		selfExecutingBundle:true, 
 		minify:true, 
@@ -27,7 +28,7 @@ gulp.task('copy-html', function() {
 	return gulp.src(conf.src +'/index.html')
 		.pipe(gulp.dest(conf.dist));
 });
-gulp.task('inject:dist', ['copy-html'], function() {
+gulp.task('inject:dist', gp('copy-html'), function() {
 	const injectOpts = { 
 		addRootSlash:false,
 		relative:true
@@ -39,7 +40,8 @@ gulp.task('inject:dist', ['copy-html'], function() {
 		.pipe(inject(gulp.src(sources, {read: false}), injectOpts))
 		.pipe(gulp.dest(conf.dist));
 });
-gulp.task('inject', [], function() {
+gulp.task('build', gp('jspm-build', 'inject:dist'), function() {});
+gulp.task('inject', function() {
 	const injectOpts = { addRootSlash: false };
 	const sources = [
 		path.join(conf.src, '/**/*.js'),
