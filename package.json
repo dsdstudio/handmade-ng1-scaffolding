@@ -37,6 +37,7 @@
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-clean": "^0.3.2",
     "gulp-cli": "^1.2.2",
+    "gulp-hash-filename": "^1.2.0",
     "gulp-inject": "^4.1.0",
     "gulp-jspm": "^0.5.10"
   }
